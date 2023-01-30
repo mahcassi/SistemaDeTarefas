@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaDeTarefas.Data;
+using SistemaDeTarefas.Repository;
 using SistemaDeTarefas.Repository.Interfaces;
 
 namespace SistemaDeTarefas
@@ -25,7 +26,7 @@ namespace SistemaDeTarefas
             // config das dependencia do repository
             // toda vez que chamar a interface IUsuarioRepository
             // a classe que vai resolver é a IUsuarioRepository
-            builder.Services.AddScoped<IUsuarioRepository, IUsuarioRepository>();
+            builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 
             var app = builder.Build();
