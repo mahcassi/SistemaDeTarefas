@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using SistemaDeTarefas.Data;
+using SistemaDeTarefas.Repository.Interfaces;
+
 namespace SistemaDeTarefas
 {
     public class Program
@@ -12,6 +16,17 @@ namespace SistemaDeTarefas
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddEntityFrameworkSqlServer()
+                .AddDbContext<SistemaTarefasDBContext>(
+                   options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+                );
+
+            // config das dependencia do repository
+            // toda vez que chamar a interface IUsuarioRepository
+            // a classe que vai resolver é a IUsuarioRepository
+            builder.Services.AddScoped<IUsuarioRepository, IUsuarioRepository>();
+
 
             var app = builder.Build();
 
