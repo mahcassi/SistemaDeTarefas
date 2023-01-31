@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using SistemaDeTarefas.Data;
 using SistemaDeTarefas.Repository;
 using SistemaDeTarefas.Repository.Interfaces;
+using System;
 
 namespace SistemaDeTarefas
 {
@@ -20,14 +22,17 @@ namespace SistemaDeTarefas
 
             builder.Services.AddEntityFrameworkSqlServer()
                 .AddDbContext<SistemaTarefasDBContext>(
-                   options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+                   options =>
+                   {
+                       options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"));
+                       options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                   }
                 );
 
             // config das dependencia do repository
             // toda vez que chamar a interface IUsuarioRepository
-            // a classe que vai resolver é a IUsuarioRepository
+            // a classe que vai resolver é a UsuarioRepository
             builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-
 
             var app = builder.Build();
 
