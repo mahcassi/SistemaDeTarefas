@@ -31,8 +31,9 @@ namespace SistemaDeTarefas
 
             // config das dependencia do repository
             // toda vez que chamar a interface IUsuarioRepository
-            // a classe que vai resolver é a UsuarioRepository
+            // vai instanciar a UsuarioRepository
             builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            builder.Services.AddScoped<ITarefaRepository, TarefaRepository>();
 
             var app = builder.Build();
 

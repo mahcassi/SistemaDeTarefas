@@ -42,7 +42,7 @@ namespace SistemaDeTarefas.Repository
 
             usuarioPorId.Nome = usuario.Nome;
             usuarioPorId.Email = usuario.Email;
-            _dbContext.Usuarios.Update(usuario);
+            _dbContext.Usuarios.Update(usuarioPorId);
             await _dbContext.SaveChangesAsync();
 
             return usuarioPorId;
